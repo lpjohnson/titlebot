@@ -24,7 +24,7 @@ To run the application:
   - This will build the images and launch all the containers, so it'll take a couple minutes
   - You'll see the logs of the main application container to get an idea of when it's ready - once you see `(Server started, use Enter to stop and go back to the console...)`
 - Once ready, open a browser and point it to `localhost:3000`
-- Enter a URL as prompted
+- Enter a URL as prompted - it **MUST but a full URL with the protocol**
     - After a few seconds Scala will do it's first compile and the operation will complete (subsequent adds should happen instantly)
 - Enjoy!
 
