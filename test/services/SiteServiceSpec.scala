@@ -13,16 +13,14 @@ import scala.concurrent.Future
 
 class SiteServiceSpec extends PlaySpec with MockitoSugar {
 
-  "add" should {
-    "be true when the role is admin" in {
+  "SiteService" should {
+    "add a new site" in {
       val mockSite = new Site(1, "url", Option("iconUrl"), Option("title"))
       val siteDao = mock[SiteDao]
       when(siteDao.add(any[String], any[Option[String]], any[Option[String]])).thenReturn(Future.successful(mockSite))
-
       val siteService = new SiteService(siteDao)
-
       val actual = siteService.addSite("url")
-      actual mustBe true
+      actual map (f => f.id mustBe(1))
     }
   }
 }
