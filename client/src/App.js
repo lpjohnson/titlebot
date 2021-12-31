@@ -65,7 +65,7 @@ function App () {
         setSiteList([...siteList, response.data])
       }).
       catch(() => {
-        setError("Please enter a valid URL!")
+        setError("Please enter a valid full URL! It must include the protocol")
       })
   }
 
