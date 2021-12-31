@@ -1,10 +1,10 @@
-import './App.css'
-import axios from 'axios'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
+import "./App.css"
+import axios from "axios"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
 import styled from "styled-components/macro"
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem"
 import React, { useEffect, useState } from "react"
 import FontStyles from "./fontStyles"
 
@@ -45,14 +45,13 @@ export const StyledError = styled.div`
   padding: 10px 0 10px;
 `
 
-function App() {
+function App () {
 
   const [siteList, setSiteList] = useState([])
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios.get(`http://localhost:9000/get-sites`)
-    .then(response => {
+    axios.get(`http://localhost:9000/get-sites`).then(response => {
       setSiteList(response.data)
     })
   }, [])
@@ -61,25 +60,26 @@ function App() {
     setError(null)
     event.preventDefault()
     const enteredUrl = event.target[0].value
-    axios.post(`http://localhost:9000/add`, { url: enteredUrl })
-      .then(response => {
+    axios.post(`http://localhost:9000/add`, { url: enteredUrl }).
+      then(response => {
         setSiteList([...siteList, response.data])
-      })
-      .catch(() => {
+      }).
+      catch(() => {
         setError("Please enter a valid URL!")
       })
   }
 
   return (
     <React.StrictMode>
-      <FontStyles />
+      <FontStyles/>
       <StyledApp className="App">
         <StyledTitle>
           Behold, a list of site titles with favicons!
         </StyledTitle>
         <StyledForm onSubmit={addUrl}>
-          <TextField size="small" id="outlined-basic" variant="outlined" name="url" />
-          <Button type ={"submit"} variant={"contained"}>Add a URL</Button>
+          <TextField size="small" id="outlined-basic" variant="outlined"
+                     name="url"/>
+          <Button type={"submit"} variant={"contained"}>Add a URL</Button>
         </StyledForm>
         {!!error && (
           <StyledError>{error}</StyledError>
@@ -88,7 +88,10 @@ function App() {
           {siteList.length && siteList.map((site) =>
             <ListItem button divider>
               <StyledRow>
-                {!!site.iconUrl ? <img width={32} height={32} src={site.iconUrl} alt={site.title}/> : null}
+                {!!site.iconUrl &&
+                (<img width={32} height={32} src={site.iconUrl}
+                      onError={(event) => event.target.style.display = "none"}
+                      alt={"favicon"}/>)}
                 <a href={site.url}>{site.title}</a>
               </StyledRow>
             </ListItem>
