@@ -27,3 +27,5 @@ To run the application:
 - Enter a URL as prompted
     - After a few seconds Scala will do it's first compile and the operation will complete (subsequent adds should happen instantly)
 - Enjoy!
+
+Once finished, you can use `make down` to stop all containers
